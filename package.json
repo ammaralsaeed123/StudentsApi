@@ -1,0 +1,12 @@
+{
+  "name": "StudentsApi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "exprss": "^0.0.1-security",
+    "nodemon": "^1.19.4",
+    "server.js": "^1.0.0"
+  }
+}
