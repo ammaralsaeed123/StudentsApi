@@ -1,44 +1,37 @@
  let expres = require('express');
-let ta = expres();
+let exp = expres();
 let fs = require("fs");
-let port =3000;
-let tar;
+let port =4000;
+let tar=[];
 // var am = tar.find
 
-fs.readFile('./students.json' , 'utf8' , (error , data)=>{
+fs.readFile(__dirname+'/students.txt' , 'utf8' , (error , data)=>{
     if(error) {
         console.log("error")
     }else{
        tar = JSON.parse(data)
-       
+       console.log(tar)    
     }
-    console.log(tar)    
 })  
 let pageSize=5;
-ta.get('/students' , (req , res)=>{
+exp.get('/students/:id' , (req , res)=>{
     res.append('Access-Control-Allow-Origin', '*');
     res.append('Access-Control-Allow-Headers', '*');
-    let page = req.query.page;
+    let page = req.url.split("/")[2];
     let start = (page-1)*pageSize;
     let end = start + pageSize;
-    res.send({
-       students : tar.slice(start,end)
-    });
+    res.send(tar.slice(start,end));
 });
-ta.listen(port , ()=>{
+exp.listen(port , ()=>{
     console.log("ammar run . . . !")
 });
-// ta.get('/students/id' , (req , res)=>{
+
+// exp.get('/students/:id' , (req , res)=>{
 //     res.append('Access-Control-Allow-Origin', '*');
 //     res.append('Access-Control-Allow-Headers', '*');
-//     let id = req.query.id;
-//     let start = (page-1)*pageSize;
-//     let end = start + pageSize;
-//     array.findfunctioncurrentValue, index, arr
-//     res.send({
-//        students : tar.slice(start,end)
-//     });
+//     let id1 = req.url.split("/")[2];
+//     let arr = tar.find(x => x.id == id1);
+//     res.send(arr);
+//     console.log(arr);
 // });
-// ta.listen(port , ()=>{
-//     console.log("ammar run . . . !")
-// });
+module.exports = exp;
